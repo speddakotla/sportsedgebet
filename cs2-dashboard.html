@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS2 Predictions - SportsEdge Bet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/cs2.css">
+</head>
+<body class="cs2-theme">
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+            </a>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    All Sports
+                </a>
+                <a href="cs2-dashboard.html" class="active">
+                    <span class="nav-icon cs2-icon">🎮</span>
+                    CS2 Predictions
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Value Bets
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    Analytics
+                </a>
+            </nav>
+            
+            <div class="sidebar-section">
+                <h4>Model Stats</h4>
+                <div class="model-stats">
+                    <div class="model-stat">
+                        <span class="stat-label">Win Rate</span>
+                        <span class="stat-value positive">67.2%</span>
+                    </div>
+                    <div class="model-stat">
+                        <span class="stat-label">ROI</span>
+                        <span class="stat-value positive">+12.4%</span>
+                    </div>
+                    <div class="model-stat">
+                        <span class="stat-label">Last 30 Days</span>
+                        <span class="stat-value">156 picks</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Data Sources</h4>
+                <nav class="sidebar-nav data-sources">
+                    <a href="#" class="source-status">
+                        <span class="status-dot online"></span>
+                        PandaScore
+                        <span class="sync-time">2m ago</span>
+                    </a>
+                    <a href="#" class="source-status">
+                        <span class="status-dot online"></span>
+                        Abios
+                        <span class="sync-time">5m ago</span>
+                    </a>
+                    <a href="#" class="source-status">
+                        <span class="status-dot online"></span>
+                        OddsPapi
+                        <span class="sync-time">1m ago</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header cs2-header">
+                <div class="header-title">
+                    <h1>
+                        <span class="cs2-badge">CS2</span>
+                        AI Predictions
+                    </h1>
+                    <p class="header-subtitle">Real-time player props & match predictions powered by machine learning</p>
+                </div>
+                <div class="header-actions">
+                    <div class="model-version">
+                        <span class="version-label">Model</span>
+                        <span class="version-value">v2.4.1</span>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-avatar">JD</div>
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Value Bets Alert -->
+            <div class="value-alert" id="value-alert">
+                <div class="alert-icon">🔥</div>
+                <div class="alert-content">
+                    <strong>3 High-Value Bets Detected!</strong>
+                    <span>Our model found edges >5% on upcoming matches</span>
+                </div>
+                <button class="btn btn-primary btn-small" onclick="scrollToValueBets()">View Now</button>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="stats-row cs2-stats">
+                <div class="stat-card glow-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="value">8</div>
+                        <div class="label">Value Bets</div>
+                    </div>
+                    <div class="change positive">+3 today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="value">12</div>
+                        <div class="label">Live Matches</div>
+                    </div>
+                    <div class="change">Monitoring</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤖</div>
+                    <div class="stat-content">
+                        <div class="value">94</div>
+                        <div class="label">Predictions</div>
+                    </div>
+                    <div class="change">This week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="value">+8.2%</div>
+                        <div class="label">Avg Edge</div>
+                    </div>
+                    <div class="change positive">↑ vs market</div>
+                </div>
+            </div>
+            
+            <!-- Live Matches Section -->
+            <section class="matches-section">
+                <div class="section-header-row">
+                    <h2>
+                        <span class="live-dot"></span>
+                        Live Matches
+                    </h2>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active">All</button>
+                        <button class="filter-tab">Value Only</button>
+                        <button class="filter-tab">Major Events</button>
+                    </div>
+                </div>
+                
+                <div class="matches-grid" id="live-matches">
+                    <!-- Live Match Card -->
+                    <div class="match-card live" data-match-id="1">
+                        <div class="match-header">
+                            <div class="match-meta">
+                                <span class="live-badge">● LIVE</span>
+                                <span class="tournament">IEM Katowice 2026</span>
+                                <span class="match-score">Map 2 • Inferno</span>
+                            </div>
+                        </div>
+                        
+                        <div class="teams-display">
+                            <div class="team team-1">
+                                <div class="team-logo">🦂</div>
+                                <div class="team-info">
+                                    <span class="team-name">Vitality</span>
+                                    <span class="team-odds">@ 1.45</span>
+                                </div>
+                                <div class="team-score">1</div>
+                            </div>
+                            <div class="vs-divider">
+                                <span class="map-score">13 - 10</span>
+                            </div>
+                            <div class="team team-2">
+                                <div class="team-score">0</div>
+                                <div class="team-info">
+                                    <span class="team-name">G2 Esports</span>
+                                    <span class="team-odds">@ 2.65</span>
+                                </div>
+                                <div class="team-logo">🔵</div>
+                            </div>
+                        </div>
+                        
+                        <div class="prediction-bar">
+                            <div class="prediction-label">
+                                <span>AI Win Probability</span>
+                                <span class="confidence">78% Vitality</span>
+                            </div>
+                            <div class="prediction-meter">
+                                <div class="meter-fill" style="width: 78%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="expand-btn" onclick="toggleMatchDetails(this)">
+                            View Player Props
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="match-details">
+                            <h4>Player Props</h4>
+                            <div class="props-grid">
+                                <div class="prop-card value-bet">
+                                    <div class="prop-header">
+                                        <span class="player-name">ZywOo</span>
+                                        <span class="value-badge">+7.2% Edge</span>
+                                    </div>
+                                    <div class="prop-type">Kills Over/Under</div>
+                                    <div class="prop-line">
+                                        <span class="line-value">O 22.5</span>
+                                        <span class="line-odds">@ 1.90</span>
+                                    </div>
+                                    <div class="prop-prediction">
+                                        <div class="pred-bar">
+                                            <div class="pred-fill over" style="width: 68%"></div>
+                                        </div>
+                                        <span class="pred-value">68% Over</span>
+                                    </div>
+                                    <div class="prop-stats">
+                                        <span>L5 Avg: 24.2</span>
+                                        <span>Form: 🔥</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="prop-card">
+                                    <div class="prop-header">
+                                        <span class="player-name">apEX</span>
+                                    </div>
+                                    <div class="prop-type">Kills Over/Under</div>
+                                    <div class="prop-line">
+                                        <span class="line-value">O 16.5</span>
+                                        <span class="line-odds">@ 1.85</span>
+                                    </div>
+                                    <div class="prop-prediction">
+                                        <div class="pred-bar">
+                                            <div class="pred-fill under" style="width: 55%"></div>
+                                        </div>
+                                        <span class="pred-value">55% Under</span>
+                                    </div>
+                                    <div class="prop-stats">
+                                        <span>L5 Avg: 15.8</span>
+                                        <span>Form: →</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="prop-card value-bet">
+                                    <div class="prop-header">
+                                        <span class="player-name">NiKo</span>
+                                        <span class="value-badge">+5.8% Edge</span>
+                                    </div>
+                                    <div class="prop-type">Kills Over/Under</div>
+                                    <div class="prop-line">
+                                        <span class="line-value">O 20.5</span>
+                                        <span class="line-odds">@ 1.95</span>
+                                    </div>
+                                    <div class="prop-prediction">
+                                        <div class="pred-bar">
+                                            <div class="pred-fill over" style="width: 62%"></div>
+                                        </div>
+                                        <span class="pred-value">62% Over</span>
+                                    </div>
+                                    <div class="prop-stats">
+                                        <span>L5 Avg: 21.4</span>
+                                        <span>Form: ↗️</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Live Match -->
+                    <div class="match-card live" data-match-id="2">
+                        <div class="match-header">
+                            <div class="match-meta">
+                                <span class="live-badge">● LIVE</span>
+                                <span class="tournament">BLAST Premier Spring</span>
+                                <span class="match-score">Map 1 • Mirage</span>
+                            </div>
+                        </div>
+                        
+                        <div class="teams-display">
+                            <div class="team team-1">
+                                <div class="team-logo">🔴</div>
+                                <div class="team-info">
+                                    <span class="team-name">NAVI</span>
+                                    <span class="team-odds">@ 1.62</span>
+                                </div>
+                                <div class="team-score">0</div>
+                            </div>
+                            <div class="vs-divider">
+                                <span class="map-score">8 - 7</span>
+                            </div>
+                            <div class="team team-2">
+                                <div class="team-score">0</div>
+                                <div class="team-info">
+                                    <span class="team-name">FaZe Clan</span>
+                                    <span class="team-odds">@ 2.25</span>
+                                </div>
+                                <div class="team-logo">⚫</div>
+                            </div>
+                        </div>
+                        
+                        <div class="prediction-bar">
+                            <div class="prediction-label">
+                                <span>AI Win Probability</span>
+                                <span class="confidence">62% NAVI</span>
+                            </div>
+                            <div class="prediction-meter">
+                                <div class="meter-fill" style="width: 62%"></div>
+                            </div>
+                        </div>
+                        
+                        <button class="expand-btn" onclick="toggleMatchDetails(this)">
+                            View Player Props
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </button>
+                        
+                        <div class="match-details">
+                            <h4>Player Props</h4>
+                            <div class="props-grid">
+                                <div class="prop-card value-bet">
+                                    <div class="prop-header">
+                                        <span class="player-name">s1mple</span>
+                                        <span class="value-badge">+9.4% Edge</span>
+                                    </div>
+                                    <div class="prop-type">Kills Over/Under</div>
+                                    <div class="prop-line">
+                                        <span class="line-value">O 24.5</span>
+                                        <span class="line-odds">@ 2.10</span>
+                                    </div>
+                                    <div class="prop-prediction">
+                                        <div class="pred-bar">
+                                            <div class="pred-fill over" style="width: 72%"></div>
+                                        </div>
+                                        <span class="pred-value">72% Over</span>
+                                    </div>
+                                    <div class="prop-stats">
+                                        <span>L5 Avg: 26.1</span>
+                                        <span>Form: 🔥</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="prop-card">
+                                    <div class="prop-header">
+                                        <span class="player-name">rain</span>
+                                    </div>
+                                    <div class="prop-type">Kills Over/Under</div>
+                                    <div class="prop-line">
+                                        <span class="line-value">O 18.5</span>
+                                        <span class="line-odds">@ 1.88</span>
+                                    </div>
+                                    <div class="prop-prediction">
+                                        <div class="pred-bar">
+                                            <div class="pred-fill over" style="width: 54%"></div>
+                                        </div>
+                                        <span class="pred-value">54% Over</span>
+                                    </div>
+                                    <div class="prop-stats">
+                                        <span>L5 Avg: 18.9</span>
+                                        <span>Form: →</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Value Bets Section -->
+            <section class="matches-section" id="value-bets-section">
+                <div class="section-header-row">
+                    <h2>
+                        <span class="fire-icon">🔥</span>
+                        Top Value Bets
+                    </h2>
+                    <span class="section-subtitle">Props where our model finds significant edge vs market odds</span>
+                </div>
+                
+                <div class="value-bets-grid" id="value-bets">
+                    <div class="value-bet-card hot">
+                        <div class="vb-badge">HOT</div>
+                        <div class="vb-header">
+                            <div class="vb-match">
+                                <span class="vb-teams">NAVI vs FaZe</span>
+                                <span class="vb-time">Starting in 2h</span>
+                            </div>
+                            <div class="vb-edge">
+                                <span class="edge-value">+9.4%</span>
+                                <span class="edge-label">Edge</span>
+                            </div>
+                        </div>
+                        <div class="vb-content">
+                            <div class="vb-player">
+                                <img src="https://img.icons8.com/color/48/user-male-circle--v1.png" alt="Player" class="player-avatar">
+                                <div class="player-info">
+                                    <span class="player-name">s1mple</span>
+                                    <span class="player-team">NAVI</span>
+                                </div>
+                            </div>
+                            <div class="vb-prop">
+                                <span class="prop-name">Kills Over 24.5</span>
+                                <span class="prop-odds">@ 2.10</span>
+                            </div>
+                        </div>
+                        <div class="vb-analysis">
+                            <div class="analysis-row">
+                                <span class="analysis-label">Our Probability</span>
+                                <span class="analysis-value">57.2%</span>
+                            </div>
+                            <div class="analysis-row">
+                                <span class="analysis-label">Market Implied</span>
+                                <span class="analysis-value dim">47.6%</span>
+                            </div>
+                            <div class="analysis-row">
+                                <span class="analysis-label">Expected Value</span>
+                                <span class="analysis-value positive">+20.1%</span>
+                            </div>
+                        </div>
+                        <div class="vb-confidence">
+                            <div class="confidence-meter">
+                                <div class="confidence-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="confidence-label">85% Model Confidence</span>
+                        </div>
+                        <div class="vb-factors">
+                            <span class="factor">🔥 Hot streak (5W)</span>
+                            <span class="factor">📈 +3.2 vs avg</span>
+                            <span class="factor">⚔️ Good H2H</span>
+                        </div>
+                    </div>
+                    
+                    <div class="value-bet-card">
+                        <div class="vb-header">
+                            <div class="vb-match">
+                                <span class="vb-teams">Astralis vs MOUZ</span>
+                                <span class="vb-time">Today, 6PM ET</span>
+                            </div>
+                            <div class="vb-edge">
+                                <span class="edge-value">+6.8%</span>
+                                <span class="edge-label">Edge</span>
+                            </div>
+                        </div>
+                        <div class="vb-content">
+                            <div class="vb-player">
+                                <img src="https://img.icons8.com/color/48/user-male-circle--v1.png" alt="Player" class="player-avatar">
+                                <div class="player-info">
+                                    <span class="player-name">Twistzz</span>
+                                    <span class="player-team">MOUZ</span>
+                                </div>
+                            </div>
+                            <div class="vb-prop">
+                                <span class="prop-name">Rating Over 1.15</span>
+                                <span class="prop-odds">@ 1.85</span>
+                            </div>
+                        </div>
+                        <div class="vb-analysis">
+                            <div class="analysis-row">
+                                <span class="analysis-label">Our Probability</span>
+                                <span class="analysis-value">60.9%</span>
+                            </div>
+                            <div class="analysis-row">
+                                <span class="analysis-label">Market Implied</span>
+                                <span class="analysis-value dim">54.1%</span>
+                            </div>
+                            <div class="analysis-row">
+                                <span class="analysis-label">Expected Value</span>
+                                <span class="analysis-value positive">+12.7%</span>
+                            </div>
+                        </div>
+                        <div class="vb-confidence">
+                            <div class="confidence-meter">
+                                <div class="confidence-fill" style="width: 72%"></div>
+                            </div>
+                            <span class="confidence-label">72% Model Confidence</span>
+                        </div>
+                        <div class="vb-factors">
+                            <span class="factor">📊 Consistent</span>
+                            <span class="factor">🎯 Map specialist</span>
+                        </div>
+                    </div>
+                    
+                    <div class="value-bet-card">
+                        <div class="vb-header">
+                            <div class="vb-match">
+                                <span class="vb-teams">Liquid vs Cloud9</span>
+                                <span class="vb-time">Tomorrow, 3PM ET</span>
+                            </div>
+                            <div class="vb-edge">
+                                <span class="edge-value">+5.3%</span>
+                                <span class="edge-label">Edge</span>
+                            </div>
+                        </div>
+                        <div class="vb-content">
+                            <div class="vb-player">
+                                <img src="https://img.icons8.com/color/48/user-male-circle--v1.png" alt="Player" class="player-avatar">
+                                <div class="player-info">
+                                    <span class="player-name">EliGE</span>
+                                    <span class="player-team">Liquid</span>
+                                </div>
+                            </div>
+                            <div class="vb-prop">
+                                <span class="prop-name">ADR Over 82.5</span>
+                                <span class="prop-odds">@ 1.90</span>
+                            </div>
+                        </div>
+                        <div class="vb-analysis">
+                            <div class="analysis-row">
+                                <span class="analysis-label">Our Probability</span>
+                                <span class="analysis-value">58.1%</span>
+                            </div>
+                            <div class="analysis-row">
+                                <span class="analysis-label">Market Implied</span>
+                                <span class="analysis-value dim">52.6%</span>
+                            </div>
+                            <div class="analysis-row">
+                                <span class="analysis-label">Expected Value</span>
+                                <span class="analysis-value positive">+10.4%</span>
+                            </div>
+                        </div>
+                        <div class="vb-confidence">
+                            <div class="confidence-meter">
+                                <div class="confidence-fill" style="width: 68%"></div>
+                            </div>
+                            <span class="confidence-label">68% Model Confidence</span>
+                        </div>
+                        <div class="vb-factors">
+                            <span class="factor">🏠 Home advantage</span>
+                            <span class="factor">↗️ Form trending up</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Upcoming Matches -->
+            <section class="matches-section">
+                <div class="section-header-row">
+                    <h2>Upcoming Matches</h2>
+                    <a href="#" class="view-all">View All →</a>
+                </div>
+                
+                <div class="upcoming-matches-table">
+                    <div class="table-header">
+                        <span>Match</span>
+                        <span>Time</span>
+                        <span>Tournament</span>
+                        <span>Prediction</span>
+                        <span>Confidence</span>
+                        <span>Odds</span>
+                    </div>
+                    
+                    <div class="table-row" onclick="openMatchModal('2')">
+                        <div class="match-cell">
+                            <span class="team-mini">🔴 NAVI</span>
+                            <span class="vs">vs</span>
+                            <span class="team-mini">⚫ FaZe</span>
+                        </div>
+                        <div class="time-cell">2h 30m</div>
+                        <div class="tournament-cell">BLAST Premier</div>
+                        <div class="prediction-cell">
+                            <span class="predicted-winner">NAVI</span>
+                            <span class="win-prob">62%</span>
+                        </div>
+                        <div class="confidence-cell">
+                            <div class="mini-meter">
+                                <div class="mini-fill high" style="width: 82%"></div>
+                            </div>
+                            <span>High</span>
+                        </div>
+                        <div class="odds-cell-table">
+                            <span class="odds-value">1.72</span>
+                            <span class="odds-book">Pinnacle</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row" onclick="openMatchModal('3')">
+                        <div class="match-cell">
+                            <span class="team-mini">⭐ Astralis</span>
+                            <span class="vs">vs</span>
+                            <span class="team-mini">🐁 MOUZ</span>
+                        </div>
+                        <div class="time-cell">5h</div>
+                        <div class="tournament-cell">ESL Pro League</div>
+                        <div class="prediction-cell">
+                            <span class="predicted-winner">MOUZ</span>
+                            <span class="win-prob">58%</span>
+                        </div>
+                        <div class="confidence-cell">
+                            <div class="mini-meter">
+                                <div class="mini-fill medium" style="width: 65%"></div>
+                            </div>
+                            <span>Medium</span>
+                        </div>
+                        <div class="odds-cell-table">
+                            <span class="odds-value">2.05</span>
+                            <span class="odds-book">Pinnacle</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-row value-row" onclick="openMatchModal('4')">
+                        <div class="match-cell">
+                            <span class="team-mini">💧 Liquid</span>
+                            <span class="vs">vs</span>
+                            <span class="team-mini">☁️ Cloud9</span>
+                            <span class="value-indicator">Value</span>
+                        </div>
+                        <div class="time-cell">Tomorrow</div>
+                        <div class="tournament-cell">IEM Dallas</div>
+                        <div class="prediction-cell">
+                            <span class="predicted-winner">Liquid</span>
+                            <span class="win-prob">67%</span>
+                        </div>
+                        <div class="confidence-cell">
+                            <div class="mini-meter">
+                                <div class="mini-fill high" style="width: 78%"></div>
+                            </div>
+                            <span>High</span>
+                        </div>
+                        <div class="odds-cell-table">
+                            <span class="odds-value">1.85</span>
+                            <span class="odds-book edge">+4.2%</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Player Leaderboard -->
+            <section class="matches-section">
+                <div class="section-header-row">
+                    <h2>🔥 Hot Players (Last 5 Matches)</h2>
+                    <div class="filter-dropdown">
+                        <select id="player-filter">
+                            <option value="all">All Teams</option>
+                            <option value="top10">Top 10 Teams</option>
+                            <option value="featured">Featured</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="players-grid" id="hot-players">
+                    <div class="player-card hot">
+                        <div class="player-rank">1</div>
+                        <div class="player-header">
+                            <div class="player-avatar-large">🎯</div>
+                            <div class="player-main-info">
+                                <span class="player-name">ZywOo</span>
+                                <span class="player-team">Vitality</span>
+                            </div>
+                            <div class="player-form-badge fire">🔥 On Fire</div>
+                        </div>
+                        <div class="player-stats-grid">
+                            <div class="player-stat">
+                                <span class="stat-value">1.42</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">24.6</span>
+                                <span class="stat-label">Avg Kills</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">89.4</span>
+                                <span class="stat-label">ADR</span>
+                            </div>
+                            <div class="player-stat trend-up">
+                                <span class="stat-value">+18%</span>
+                                <span class="stat-label">vs Avg</span>
+                            </div>
+                        </div>
+                        <div class="player-form-chart">
+                            <div class="form-bar" style="height: 80%"></div>
+                            <div class="form-bar" style="height: 95%"></div>
+                            <div class="form-bar" style="height: 70%"></div>
+                            <div class="form-bar" style="height: 100%"></div>
+                            <div class="form-bar" style="height: 90%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-rank">2</div>
+                        <div class="player-header">
+                            <div class="player-avatar-large">⚡</div>
+                            <div class="player-main-info">
+                                <span class="player-name">s1mple</span>
+                                <span class="player-team">NAVI</span>
+                            </div>
+                            <div class="player-form-badge up">↗️ Trending</div>
+                        </div>
+                        <div class="player-stats-grid">
+                            <div class="player-stat">
+                                <span class="stat-value">1.38</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">23.2</span>
+                                <span class="stat-label">Avg Kills</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">86.7</span>
+                                <span class="stat-label">ADR</span>
+                            </div>
+                            <div class="player-stat trend-up">
+                                <span class="stat-value">+12%</span>
+                                <span class="stat-label">vs Avg</span>
+                            </div>
+                        </div>
+                        <div class="player-form-chart">
+                            <div class="form-bar" style="height: 70%"></div>
+                            <div class="form-bar" style="height: 85%"></div>
+                            <div class="form-bar" style="height: 90%"></div>
+                            <div class="form-bar" style="height: 75%"></div>
+                            <div class="form-bar" style="height: 95%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="player-card">
+                        <div class="player-rank">3</div>
+                        <div class="player-header">
+                            <div class="player-avatar-large">💎</div>
+                            <div class="player-main-info">
+                                <span class="player-name">NiKo</span>
+                                <span class="player-team">G2</span>
+                            </div>
+                            <div class="player-form-badge stable">→ Stable</div>
+                        </div>
+                        <div class="player-stats-grid">
+                            <div class="player-stat">
+                                <span class="stat-value">1.31</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">21.8</span>
+                                <span class="stat-label">Avg Kills</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">84.2</span>
+                                <span class="stat-label">ADR</span>
+                            </div>
+                            <div class="player-stat">
+                                <span class="stat-value">+5%</span>
+                                <span class="stat-label">vs Avg</span>
+                            </div>
+                        </div>
+                        <div class="player-form-chart">
+                            <div class="form-bar" style="height: 75%"></div>
+                            <div class="form-bar" style="height: 80%"></div>
+                            <div class="form-bar" style="height: 78%"></div>
+                            <div class="form-bar" style="height: 82%"></div>
+                            <div class="form-bar" style="height: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/cs2-dashboard.js"></script>
+</body>
+</html>

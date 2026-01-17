@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - SportsEdge Bet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        .pricing-page {
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+        
+        .pricing-hero {
+            text-align: center;
+            padding: 60px 0 40px;
+        }
+        
+        .pricing-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .pricing-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .pricing-section {
+            padding: 40px 0 100px;
+        }
+        
+        .pricing-cards-detailed {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+        
+        .pricing-card-detailed {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            transition: all var(--transition-base);
+        }
+        
+        .pricing-card-detailed:hover {
+            border-color: var(--border-color-hover);
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pricing-card-detailed.popular {
+            border-color: var(--accent-primary);
+            background: linear-gradient(180deg, rgba(34, 197, 94, 0.1), var(--bg-card));
+            transform: scale(1.02);
+        }
+        
+        .pricing-card-detailed.popular:hover {
+            transform: scale(1.02) translateY(-8px);
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        
+        .plan-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: var(--bg-tertiary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .pricing-card-detailed.popular .plan-icon {
+            background: var(--accent-primary-dim);
+        }
+        
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .plan-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .plan-price {
+            text-align: center;
+            padding: 24px 0;
+            margin-bottom: 24px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .price-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 4px;
+        }
+        
+        .price-currency {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .price-amount {
+            font-size: 4rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            line-height: 1;
+        }
+        
+        .price-period {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        .price-yearly {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .price-yearly strong {
+            color: var(--accent-primary);
+        }
+        
+        .plan-features {
+            margin-bottom: 32px;
+        }
+        
+        .plan-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 0.95rem;
+        }
+        
+        .plan-features li:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .feature-check {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            background: var(--accent-primary-dim);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-primary);
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        .feature-x {
+            width: 20px;
+            height: 20px;
+            min-width: 20px;
+            background: var(--bg-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+        
+        .plan-features li.disabled {
+            color: var(--text-muted);
+        }
+        
+        .feature-highlight {
+            background: var(--accent-primary-dim);
+            color: var(--accent-primary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .plan-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .plan-cta .btn {
+            width: 100%;
+            padding: 16px;
+        }
+        
+        .plan-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            margin-top: 80px;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px 24px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table th:not(:first-child),
+        .comparison-table td:not(:first-child) {
+            text-align: center;
+            width: 150px;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table .feature-name {
+            font-weight: 500;
+        }
+        
+        .comparison-table .check {
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+        }
+        
+        .comparison-table .x {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        
+        .comparison-table .limited {
+            color: var(--warning);
+            font-size: 0.85rem;
+        }
+        
+        .table-highlight {
+            background: rgba(34, 197, 94, 0.05);
+        }
+        
+        /* Trial Section */
+        .trial-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 80px;
+        }
+        
+        .trial-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+        
+        .trial-card .icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 20px;
+            background: var(--accent-primary-dim);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .trial-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .trial-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* FAQ Specific */
+        .pricing-faq {
+            margin-top: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .pricing-faq h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+        
+        /* Guarantee */
+        .guarantee-section {
+            margin-top: 80px;
+            text-align: center;
+            padding: 60px;
+            background: linear-gradient(135deg, var(--bg-card), var(--bg-tertiary));
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+        }
+        
+        .guarantee-icon {
+            font-size: 4rem;
+            margin-bottom: 24px;
+        }
+        
+        .guarantee-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+        }
+        
+        .guarantee-section p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        @media (max-width: 1024px) {
+            .pricing-cards-detailed {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                margin: 0 auto 80px;
+            }
+            
+            .pricing-card-detailed.popular {
+                transform: none;
+                order: -1;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .trial-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#how-it-works">How It Works</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="index.html#faq">FAQ</a>
+            </div>
+            <div class="nav-actions">
+                <a href="dashboard.html" class="btn btn-ghost">Login</a>
+                <a href="pricing.html" class="btn btn-primary">Start Free Trial</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="pricing-page">
+        <div class="container">
+            <!-- Hero -->
+            <div class="pricing-hero">
+                <h1>Simple, Transparent <span class="highlight">Pricing</span></h1>
+                <p>Start with a free trial. No credit card required. Cancel anytime.</p>
+            </div>
+            
+            <!-- Billing Toggle -->
+            <div class="pricing-toggle">
+                <span class="toggle-label active" id="monthly-label">Monthly</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="billing-toggle-page">
+                    <span class="toggle-slider"></span>
+                </label>
+                <span class="toggle-label" id="yearly-label">Yearly <span class="save-badge">Save 20%</span></span>
+            </div>
+            
+            <!-- Pricing Cards -->
+            <section class="pricing-section">
+                <div class="pricing-cards-detailed">
+                    <!-- Starter -->
+                    <div class="pricing-card-detailed">
+                        <div class="plan-header">
+                            <div class="plan-icon">🎯</div>
+                            <h3 class="plan-name">Starter</h3>
+                            <p class="plan-desc">For casual bettors getting started</p>
+                        </div>
+                        <div class="plan-price">
+                            <div class="price-row">
+                                <span class="price-currency">$</span>
+                                <span class="price-amount" data-monthly="0" data-yearly="0">0</span>
+                            </div>
+                            <div class="price-period">Free forever</div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Basic odds comparison
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                5 sportsbooks (DraftKings, FanDuel, BetMGM, Caesars, PointsBet)
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                NFL, NBA, MLB, NHL only
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                15-minute delayed odds
+                            </li>
+                            <li class="disabled">
+                                <span class="feature-x">×</span>
+                                Line movement alerts
+                            </li>
+                            <li class="disabled">
+                                <span class="feature-x">×</span>
+                                Value bet finder
+                            </li>
+                            <li class="disabled">
+                                <span class="feature-x">×</span>
+                                Bet tracking
+                            </li>
+                        </ul>
+                        <div class="plan-cta">
+                            <a href="dashboard.html" class="btn btn-outline">Get Started Free</a>
+                            <p class="plan-note">No credit card required</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Pro -->
+                    <div class="pricing-card-detailed popular">
+                        <div class="plan-badge">Most Popular</div>
+                        <div class="plan-header">
+                            <div class="plan-icon">🚀</div>
+                            <h3 class="plan-name">Pro</h3>
+                            <p class="plan-desc">For serious bettors who want an edge</p>
+                        </div>
+                        <div class="plan-price">
+                            <div class="price-row">
+                                <span class="price-currency">$</span>
+                                <span class="price-amount" data-monthly="29" data-yearly="23">29</span>
+                                <span class="price-period">/mo</span>
+                            </div>
+                            <div class="price-yearly">
+                                or <strong>$276/year</strong> (save $72)
+                            </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Real-time odds comparison <span class="feature-highlight">Live</span>
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                All 30+ sportsbooks
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                All sports & leagues worldwide
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Instant line movement alerts
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Value bet finder (AI-powered)
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Complete bet tracking & analytics
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Email & chat support
+                            </li>
+                        </ul>
+                        <div class="plan-cta">
+                            <a href="#" class="btn btn-primary" id="start-pro-trial">Start 7-Day Free Trial</a>
+                            <p class="plan-note">No credit card required • Cancel anytime</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Elite -->
+                    <div class="pricing-card-detailed">
+                        <div class="plan-header">
+                            <div class="plan-icon">👑</div>
+                            <h3 class="plan-name">Elite</h3>
+                            <p class="plan-desc">Maximum edge for professional bettors</p>
+                        </div>
+                        <div class="plan-price">
+                            <div class="price-row">
+                                <span class="price-currency">$</span>
+                                <span class="price-amount" data-monthly="79" data-yearly="63">79</span>
+                                <span class="price-period">/mo</span>
+                            </div>
+                            <div class="price-yearly">
+                                or <strong>$756/year</strong> (save $192)
+                            </div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Everything in Pro
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Arbitrage opportunity alerts <span class="feature-highlight">Hot</span>
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Expert handicapper picks
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Full API access
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Custom alerts & thresholds
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Priority support (24/7)
+                            </li>
+                            <li>
+                                <span class="feature-check">✓</span>
+                                Early access to new features
+                            </li>
+                        </ul>
+                        <div class="plan-cta">
+                            <a href="#" class="btn btn-outline" id="start-elite-trial">Start 7-Day Free Trial</a>
+                            <p class="plan-note">No credit card required • Cancel anytime</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Trial Info -->
+                <div class="trial-info">
+                    <div class="trial-card">
+                        <div class="icon">🎁</div>
+                        <h3>7-Day Free Trial</h3>
+                        <p>Try Pro or Elite free for 7 days. Full access to all features. No credit card required to start.</p>
+                    </div>
+                    <div class="trial-card">
+                        <div class="icon">🔄</div>
+                        <h3>Cancel Anytime</h3>
+                        <p>No contracts, no commitments. Cancel with one click from your account. Keep access until period ends.</p>
+                    </div>
+                    <div class="trial-card">
+                        <div class="icon">💳</div>
+                        <h3>Secure Payment</h3>
+                        <p>256-bit SSL encryption. We accept all major credit cards, PayPal, and Apple Pay.</p>
+                    </div>
+                </div>
+                
+                <!-- Comparison Table -->
+                <div class="comparison-section">
+                    <h2 class="comparison-title">Feature Comparison</h2>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Starter</th>
+                                <th class="table-highlight">Pro</th>
+                                <th>Elite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="feature-name">Sportsbooks Compared</td>
+                                <td>5</td>
+                                <td class="table-highlight">30+</td>
+                                <td>30+</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Sports Coverage</td>
+                                <td class="limited">Major US only</td>
+                                <td class="table-highlight">All Sports</td>
+                                <td>All Sports</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Odds Update Speed</td>
+                                <td class="limited">15 min delay</td>
+                                <td class="table-highlight check">Real-time</td>
+                                <td class="check">Real-time</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Line Movement Alerts</td>
+                                <td class="x">—</td>
+                                <td class="table-highlight check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Value Bet Finder</td>
+                                <td class="x">—</td>
+                                <td class="table-highlight check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Bet Tracking</td>
+                                <td class="x">—</td>
+                                <td class="table-highlight check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Arbitrage Alerts</td>
+                                <td class="x">—</td>
+                                <td class="table-highlight x">—</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Expert Picks</td>
+                                <td class="x">—</td>
+                                <td class="table-highlight x">—</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">API Access</td>
+                                <td class="x">—</td>
+                                <td class="table-highlight x">—</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td class="feature-name">Support</td>
+                                <td>Community</td>
+                                <td class="table-highlight">Email & Chat</td>
+                                <td>24/7 Priority</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Guarantee -->
+                <div class="guarantee-section">
+                    <div class="guarantee-icon">🛡️</div>
+                    <h2>30-Day Money-Back Guarantee</h2>
+                    <p>Not satisfied? Get a full refund within 30 days of your first payment, no questions asked. We're confident you'll love SportsEdgeBet, but if it's not for you, we've got you covered.</p>
+                </div>
+                
+                <!-- FAQ -->
+                <div class="pricing-faq">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>How does the 7-day free trial work?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Sign up with just your email—no credit card required. You'll get full access to Pro features for 7 days. Near the end, we'll remind you to upgrade. If you don't, you'll automatically switch to our free Starter plan.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>What happens when my trial ends?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>If you haven't upgraded, you'll be moved to our free Starter tier. You'll still have access to basic odds comparison, just with fewer features. You can upgrade anytime to unlock full functionality.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Can I change plans later?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Absolutely! You can upgrade, downgrade, or cancel at any time from your account settings. Plan changes take effect at your next billing cycle, and we'll prorate any differences.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>Do you offer team or enterprise plans?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes! For betting groups, syndicates, or businesses that need multiple accounts or custom integrations, contact our sales team at enterprise@sportsedgebet.com for custom pricing.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <button class="faq-question">
+                                <span>What payment methods do you accept?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>We accept all major credit and debit cards (Visa, Mastercard, Amex, Discover), PayPal, Apple Pay, and Google Pay. All payments are processed securely through Stripe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+                    </a>
+                    <p>The smartest way to compare sports betting odds and find value.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter">𝕏</a>
+                        <a href="#" aria-label="Discord">💬</a>
+                        <a href="#" aria-label="YouTube">▶</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <a href="index.html#features">Features</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="dashboard.html">Dashboard</a>
+                    <a href="#">Mobile App</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Responsible Gaming</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SportsEdgeBet. All rights reserved.</p>
+                <p class="disclaimer">Gambling involves risk. Please gamble responsibly. 21+ only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Initialize Stripe
+        const stripe = Stripe(CONFIG.STRIPE_PUBLISHABLE_KEY);
+        
+        // Track billing period
+        let isYearly = false;
+        
+        // Update billing toggle
+        const billingToggle = document.getElementById('billing-toggle-page');
+        if (billingToggle) {
+            billingToggle.addEventListener('change', (e) => {
+                isYearly = e.target.checked;
+                document.getElementById('monthly-label').classList.toggle('active', !isYearly);
+                document.getElementById('yearly-label').classList.toggle('active', isYearly);
+                
+                // Update prices
+                document.querySelectorAll('.price-amount').forEach(el => {
+                    const monthly = el.dataset.monthly;
+                    const yearly = el.dataset.yearly;
+                    el.textContent = isYearly ? yearly : monthly;
+                });
+            });
+        }
+
+        // Handle Pro subscription
+        document.getElementById('start-pro-trial').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await startCheckout('pro');
+        });
+
+        // Handle Elite subscription
+        document.getElementById('start-elite-trial').addEventListener('click', async (e) => {
+            e.preventDefault();
+            await startCheckout('elite');
+        });
+
+        // Start Stripe Checkout
+        async function startCheckout(plan) {
+            // Check if user is logged in
+            const user = await Auth.getCurrentUser();
+            
+            if (!user) {
+                // Redirect to signup with return URL
+                window.location.href = `/signup.html?redirect=${encodeURIComponent(window.location.pathname)}&plan=${plan}`;
+                return;
+            }
+
+            // Determine price ID
+            const priceId = isYearly ? `${plan}_yearly` : `${plan}_monthly`;
+
+            try {
+                // Show loading state
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = 'Loading...';
+                btn.disabled = true;
+
+                // Create checkout session
+                const response = await fetch('/api/create-checkout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        priceId,
+                        userId: user.id,
+                        userEmail: user.email,
+                    }),
+                });
+
+                const { url, error } = await response.json();
+
+                if (error) {
+                    throw new Error(error);
+                }
+
+                // Redirect to Stripe Checkout
+                window.location.href = url;
+            } catch (error) {
+                console.error('Checkout error:', error);
+                alert('Error starting checkout. Please try again.');
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // Check for success/canceled URL params
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            alert('🎉 Subscription activated! Welcome to SportsEdgeBet Pro!');
+            window.history.replaceState({}, '', '/pricing.html');
+        }
+        if (urlParams.get('canceled') === 'true') {
+            // User canceled checkout - no action needed
+            window.history.replaceState({}, '', '/pricing.html');
+        }
+    </script>
+</body>
+</html>
+

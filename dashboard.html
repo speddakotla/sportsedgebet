@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SportsEdge Bet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+            </a>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    Odds Comparison
+                </a>
+                <a href="cs2-dashboard.html">
+                    <span class="nav-icon" style="font-size: 1.1rem;">🎮</span>
+                    CS2 Predictions
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Value Bets
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    Line Alerts
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                    Bet Tracker
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    Analytics
+                </a>
+            </nav>
+            
+            <div class="sidebar-section">
+                <h4>My Sportsbooks</h4>
+                <nav class="sidebar-nav">
+                    <a href="#">
+                        <span class="book-indicator" style="background: #53d769;"></span>
+                        DraftKings
+                    </a>
+                    <a href="#">
+                        <span class="book-indicator" style="background: #1493ff;"></span>
+                        FanDuel
+                    </a>
+                    <a href="#">
+                        <span class="book-indicator" style="background: #bf9b30;"></span>
+                        BetMGM
+                    </a>
+                    <a href="#">
+                        <span class="book-indicator" style="background: #006747;"></span>
+                        Caesars
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Account</h4>
+                <nav class="sidebar-nav">
+                    <a href="pricing.html">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                        Upgrade Plan
+                    </a>
+                    <a href="#">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                        Settings
+                    </a>
+                    <a href="index.html">
+                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                            <polyline points="16 17 21 12 16 7"/>
+                            <line x1="21" y1="12" x2="9" y2="12"/>
+                        </svg>
+                        Logout
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <h1>Odds Comparison</h1>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search teams, games, leagues...">
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-avatar">JD</div>
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Trial Banner -->
+            <div class="subscription-banner">
+                <div class="banner-content">
+                    <h3>🎉 You're on your 7-day Pro trial!</h3>
+                    <p>Enjoying full access to real-time odds, alerts, and value bets. Upgrade to continue.</p>
+                </div>
+                <div class="trial-countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value">4</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value">12</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value">38</div>
+                        <div class="countdown-label">Min</div>
+                    </div>
+                    <a href="pricing.html" class="btn btn-primary">Upgrade Now</a>
+                </div>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="label">Best Odds Found Today</div>
+                    <div class="value">47</div>
+                    <div class="change positive">↑ 12% vs yesterday</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Value Bets Available</div>
+                    <div class="value">8</div>
+                    <div class="change positive">↑ 3 new</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Your Savings (Est.)</div>
+                    <div class="value">$124</div>
+                    <div class="change positive">This week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Active Alerts</div>
+                    <div class="value">12</div>
+                    <div class="change">Monitoring</div>
+                </div>
+            </div>
+            
+            <!-- Sport Tabs -->
+            <div class="sport-tabs">
+                <button class="sport-tab active">
+                    🏈 NFL
+                    <span class="count">14</span>
+                </button>
+                <button class="sport-tab">
+                    🏀 NBA
+                    <span class="count">12</span>
+                </button>
+                <button class="sport-tab" onclick="window.location.href='cs2-dashboard.html'" style="border-color: rgba(255, 107, 53, 0.3); background: rgba(255, 107, 53, 0.1);">
+                    🎮 CS2
+                    <span class="count" style="background: #ff6b35; color: #000;">AI</span>
+                </button>
+                <button class="sport-tab">
+                    🏒 NHL
+                    <span class="count">8</span>
+                </button>
+                <button class="sport-tab">
+                    ⚾ MLB
+                    <span class="count">0</span>
+                </button>
+                <button class="sport-tab">
+                    🎾 Tennis
+                    <span class="count">24</span>
+                </button>
+                <button class="sport-tab">
+                    ⚽ Soccer
+                    <span class="count">32</span>
+                </button>
+                <button class="sport-tab">
+                    🥊 MMA
+                    <span class="count">6</span>
+                </button>
+            </div>
+            
+            <!-- Live Games -->
+            <div class="games-section">
+                <h2>
+                    <span class="live-indicator"></span>
+                    Live Now
+                </h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-info">
+                                <span class="game-time live">● LIVE - Q3 8:42</span>
+                                <span class="game-league">NFL</span>
+                            </div>
+                            <span class="best-odds-badge">+12% Value</span>
+                        </div>
+                        <div class="odds-header">
+                            <span>Team</span>
+                            <span>Spread</span>
+                            <span>Total</span>
+                            <span>Moneyline</span>
+                        </div>
+                        <div class="teams">
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🦅</span>
+                                    Philadelphia Eagles
+                                </span>
+                                <span class="odds-cell">-3.5 (-110)</span>
+                                <span class="odds-cell">O 48.5 (-108)</span>
+                                <span class="odds-cell best">-165</span>
+                            </div>
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🤠</span>
+                                    Dallas Cowboys
+                                </span>
+                                <span class="odds-cell best">+3.5 (-105)</span>
+                                <span class="odds-cell">U 48.5 (-112)</span>
+                                <span class="odds-cell">+145</span>
+                            </div>
+                        </div>
+                        <div class="compare-row">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); margin-right: 8px;">ML Compare:</span>
+                            <div class="book-odds best">
+                                <span class="book-name">DraftKings</span>
+                                <span class="book-value">+145</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">FanDuel</span>
+                                <span class="book-value">+140</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">BetMGM</span>
+                                <span class="book-value">+138</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">Caesars</span>
+                                <span class="book-value">+135</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Upcoming Games -->
+            <div class="games-section">
+                <h2>Upcoming Games</h2>
+                <div class="games-grid">
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-info">
+                                <span class="game-time">Today, 8:20 PM ET</span>
+                                <span class="game-league">NFL</span>
+                            </div>
+                            <span class="best-odds-badge">+8% Value</span>
+                        </div>
+                        <div class="odds-header">
+                            <span>Team</span>
+                            <span>Spread</span>
+                            <span>Total</span>
+                            <span>Moneyline</span>
+                        </div>
+                        <div class="teams">
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🐻</span>
+                                    Chicago Bears
+                                </span>
+                                <span class="odds-cell">+7.5 (-110)</span>
+                                <span class="odds-cell">O 44.5 (-110)</span>
+                                <span class="odds-cell">+285</span>
+                            </div>
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🧀</span>
+                                    Green Bay Packers
+                                </span>
+                                <span class="odds-cell best">-7.5 (-105)</span>
+                                <span class="odds-cell">U 44.5 (-110)</span>
+                                <span class="odds-cell best">-330</span>
+                            </div>
+                        </div>
+                        <div class="compare-row">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); margin-right: 8px;">Spread Compare:</span>
+                            <div class="book-odds best">
+                                <span class="book-name">FanDuel</span>
+                                <span class="book-value">-7.5 (-105)</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">DraftKings</span>
+                                <span class="book-value">-7.5 (-110)</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">BetMGM</span>
+                                <span class="book-value">-7.5 (-110)</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">Caesars</span>
+                                <span class="book-value">-7.5 (-112)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-info">
+                                <span class="game-time">Tomorrow, 1:00 PM ET</span>
+                                <span class="game-league">NFL</span>
+                            </div>
+                        </div>
+                        <div class="odds-header">
+                            <span>Team</span>
+                            <span>Spread</span>
+                            <span>Total</span>
+                            <span>Moneyline</span>
+                        </div>
+                        <div class="teams">
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🦁</span>
+                                    Detroit Lions
+                                </span>
+                                <span class="odds-cell best">-4.5 (-108)</span>
+                                <span class="odds-cell">O 51.5 (-110)</span>
+                                <span class="odds-cell">-195</span>
+                            </div>
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🐆</span>
+                                    Jacksonville Jaguars
+                                </span>
+                                <span class="odds-cell">+4.5 (-112)</span>
+                                <span class="odds-cell best">U 51.5 (-105)</span>
+                                <span class="odds-cell best">+175</span>
+                            </div>
+                        </div>
+                        <div class="compare-row">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); margin-right: 8px;">ML Compare:</span>
+                            <div class="book-odds best">
+                                <span class="book-name">PointsBet</span>
+                                <span class="book-value">+175</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">DraftKings</span>
+                                <span class="book-value">+170</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">FanDuel</span>
+                                <span class="book-value">+168</span>
+                            </div>
+                            <div class="book-odds">
+                                <span class="book-name">BetMGM</span>
+                                <span class="book-value">+165</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-card">
+                        <div class="game-header">
+                            <div class="game-info">
+                                <span class="game-time">Tomorrow, 4:25 PM ET</span>
+                                <span class="game-league">NFL</span>
+                            </div>
+                            <span class="best-odds-badge">⚡ Arbitrage</span>
+                        </div>
+                        <div class="odds-header">
+                            <span>Team</span>
+                            <span>Spread</span>
+                            <span>Total</span>
+                            <span>Moneyline</span>
+                        </div>
+                        <div class="teams">
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">🐬</span>
+                                    Miami Dolphins
+                                </span>
+                                <span class="odds-cell">-2.5 (-110)</span>
+                                <span class="odds-cell best">O 49.5 (-105)</span>
+                                <span class="odds-cell">-135</span>
+                            </div>
+                            <div class="team-row">
+                                <span class="team-name">
+                                    <span class="team-logo">✈️</span>
+                                    New York Jets
+                                </span>
+                                <span class="odds-cell">+2.5 (-110)</span>
+                                <span class="odds-cell">U 49.5 (-115)</span>
+                                <span class="odds-cell best">+125</span>
+                            </div>
+                        </div>
+                        <div class="compare-row">
+                            <span style="font-size: 0.8rem; color: var(--text-muted); margin-right: 8px;">Arb Opportunity:</span>
+                            <div class="book-odds best">
+                                <span class="book-name">BetRivers</span>
+                                <span class="book-value">+125</span>
+                            </div>
+                            <div class="book-odds best">
+                                <span class="book-name">Caesars</span>
+                                <span class="book-value">-120</span>
+                            </div>
+                            <span style="font-size: 0.85rem; color: var(--accent-primary); font-weight: 600; margin-left: auto;">1.2% guaranteed profit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="scripts/main.js"></script>
+</body>
+</html>
+
+

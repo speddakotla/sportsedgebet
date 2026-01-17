@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Waitlist - SportsEdge Bet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <style>
+        /* Waitlist Page Specific Styles */
+        .waitlist-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .waitlist-hero {
+            position: relative;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 24px 80px;
+            overflow: hidden;
+        }
+
+        .waitlist-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+
+        .waitlist-gradient {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(ellipse 100% 80% at 50% 0%, rgba(34, 197, 94, 0.2), transparent 50%),
+                radial-gradient(ellipse 80% 60% at 20% 100%, rgba(16, 185, 129, 0.15), transparent 50%),
+                radial-gradient(ellipse 60% 50% at 90% 50%, rgba(34, 197, 94, 0.1), transparent 50%);
+        }
+
+        .waitlist-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+        }
+
+        /* Animated particles */
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float-particle 8s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 1s; }
+        .particle:nth-child(3) { left: 30%; top: 40%; animation-delay: 2s; }
+        .particle:nth-child(4) { left: 50%; top: 80%; animation-delay: 0.5s; }
+        .particle:nth-child(5) { left: 60%; top: 30%; animation-delay: 1.5s; }
+        .particle:nth-child(6) { left: 70%; top: 70%; animation-delay: 2.5s; }
+        .particle:nth-child(7) { left: 80%; top: 20%; animation-delay: 3s; }
+        .particle:nth-child(8) { left: 90%; top: 50%; animation-delay: 0.8s; }
+        .particle:nth-child(9) { left: 15%; top: 85%; animation-delay: 1.8s; }
+        .particle:nth-child(10) { left: 85%; top: 85%; animation-delay: 2.8s; }
+
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
+            50% { transform: translateY(-30px) scale(1.5); opacity: 0.8; }
+        }
+
+        .waitlist-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 680px;
+            width: 100%;
+        }
+
+        .waitlist-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .waitlist-badge .icon {
+            font-size: 1.1rem;
+        }
+
+        .waitlist-title {
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .waitlist-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        /* Email Form */
+        .waitlist-form {
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .form-container {
+            display: flex;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .email-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: 14px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: var(--font-primary);
+            transition: all var(--transition-base);
+        }
+
+        .email-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 4px var(--accent-primary-dim);
+        }
+
+        .submit-btn {
+            padding: 18px 32px;
+            background: var(--accent-primary);
+            color: #000;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-glow);
+        }
+
+        .submit-btn svg {
+            transition: transform var(--transition-base);
+        }
+
+        .submit-btn:hover svg {
+            transform: translateX(4px);
+        }
+
+        .form-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .form-note span {
+            color: var(--accent-primary);
+        }
+
+        /* Success State */
+        .success-message {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-primary-dim);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 2.5rem;
+        }
+
+        .success-message h3 {
+            font-size: 1.75rem;
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .waitlist-form.hidden {
+            display: none;
+        }
+
+        /* Stats Section */
+        .waitlist-stats {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 64px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .waitlist-stat {
+            text-align: center;
+        }
+
+        .waitlist-stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .waitlist-stat-number .plus {
+            color: var(--accent-primary);
+        }
+
+        .waitlist-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 50px;
+            background: var(--border-color);
+        }
+
+        /* Features Preview */
+        .features-preview {
+            padding: 80px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .features-preview .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .features-preview h2 {
+            text-align: center;
+            font-size: 1.75rem;
+            margin-bottom: 48px;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .preview-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--card-radius);
+            padding: 28px;
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .preview-card:hover {
+            border-color: var(--border-color-hover);
+            transform: translateY(-4px);
+        }
+
+        .preview-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-primary-dim);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+        }
+
+        .preview-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .preview-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .float-card {
+            position: absolute;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-family: var(--font-mono);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-card .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: var(--font-primary);
+            margin-bottom: 4px;
+        }
+
+        .float-card .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--positive);
+        }
+
+        .float-1 { top: 18%; left: 8%; animation-delay: 0s; }
+        .float-2 { top: 25%; right: 10%; animation-delay: 1.5s; }
+        .float-3 { bottom: 30%; left: 6%; animation-delay: 0.8s; }
+        .float-4 { bottom: 22%; right: 8%; animation-delay: 2s; }
+
+        /* Minimal Footer */
+        .waitlist-footer {
+            padding: 32px 24px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .waitlist-footer .logo {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .waitlist-footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-container {
+                flex-direction: column;
+            }
+
+            .submit-btn {
+                justify-content: center;
+            }
+
+            .waitlist-stats {
+                flex-direction: column;
+                gap: 32px;
+            }
+
+            .stat-divider {
+                width: 60px;
+                height: 1px;
+            }
+
+            .preview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-elements {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .waitlist-hero {
+                padding: 100px 20px 60px;
+            }
+
+            .waitlist-badge {
+                font-size: 0.8rem;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="waitlist-page">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+                </a>
+                <div class="nav-links">
+                    <a href="index.html#features">Features</a>
+                    <a href="index.html#how-it-works">How It Works</a>
+                    <a href="pricing.html">Pricing</a>
+                    <a href="index.html#faq">FAQ</a>
+                </div>
+                <div class="nav-actions">
+                    <a href="dashboard.html" class="btn btn-ghost">Login</a>
+                    <a href="waitlist.html" class="btn btn-primary">Join Waitlist</a>
+                </div>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Waitlist Hero -->
+        <section class="waitlist-hero">
+            <div class="waitlist-bg">
+                <div class="waitlist-gradient"></div>
+                <div class="waitlist-grid"></div>
+                <div class="particles">
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                    <div class="particle"></div>
+                </div>
+            </div>
+
+            <!-- Floating odds cards -->
+            <div class="floating-elements">
+                <div class="float-card float-1">
+                    <div class="label">Best Odds Found</div>
+                    <div class="value">+185</div>
+                </div>
+                <div class="float-card float-2">
+                    <div class="label">Value Detected</div>
+                    <div class="value">+12.4%</div>
+                </div>
+                <div class="float-card float-3">
+                    <div class="label">Line Movement</div>
+                    <div class="value">↑ 3 pts</div>
+                </div>
+                <div class="float-card float-4">
+                    <div class="label">Arbitrage</div>
+                    <div class="value">2.1%</div>
+                </div>
+            </div>
+
+            <div class="waitlist-content">
+                <div class="waitlist-badge">
+                    <span class="icon">🚀</span>
+                    <span>Early Access Opening Soon</span>
+                </div>
+
+                <h1 class="waitlist-title">
+                    Be First to Get Your <span class="highlight">Edge</span>
+                </h1>
+
+                <p class="waitlist-subtitle">
+                    Join the waitlist for exclusive early access to our AI-powered odds comparison platform. Get notified when we launch and lock in founder pricing.
+                </p>
+
+                <!-- Email Form -->
+                <div class="waitlist-form" id="waitlistForm">
+                    <!-- 
+                        FREE OPTIONS - Choose one:
+                        
+                        1. FormSubmit (no signup): 
+                           action="https://formsubmit.co/YOUR_EMAIL@gmail.com"
+                        
+                        2. Formspree (50/month free):
+                           action="https://formspree.io/f/YOUR_FORM_ID"
+                        
+                        3. Web3Forms (unlimited free):
+                           action="https://api.web3forms.com/submit"
+                           + add hidden input with access_key
+                    -->
+                    <form 
+                        class="form-container" 
+                        id="emailForm"
+                        action="https://formsubmit.co/sportsedgebet@gmail.com"
+                        method="POST"
+                    >
+                        <!-- FormSubmit configuration -->
+                        <input type="hidden" name="_subject" value="New Waitlist Signup! 🎉">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://sportsedgebet.com/waitlist.html?success=true">
+                        
+                        <div class="email-input-wrapper">
+                            <input 
+                                type="email" 
+                                name="email"
+                                class="email-input" 
+                                placeholder="Enter your email address"
+                                required
+                                id="emailInput"
+                            >
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <span>Join Waitlist</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <p class="form-note">
+                        🔒 No spam, ever. <span>Unsubscribe anytime.</span>
+                    </p>
+                </div>
+
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✓</div>
+                    <h3>You're on the list!</h3>
+                    <p>We'll notify you as soon as early access opens.</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="waitlist-stats">
+                    <div class="waitlist-stat">
+                        <div class="waitlist-stat-number" id="waitlistCount">2,847<span class="plus">+</span></div>
+                        <div class="waitlist-stat-label">On the waitlist</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="waitlist-stat">
+                        <div class="waitlist-stat-number">30<span class="plus">+</span></div>
+                        <div class="waitlist-stat-label">Sportsbooks</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="waitlist-stat">
+                        <div class="waitlist-stat-number">50<span class="plus">%</span></div>
+                        <div class="waitlist-stat-label">Founder Discount</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Preview -->
+        <section class="features-preview">
+            <div class="container">
+                <h2>What You'll Get Access To</h2>
+                <div class="preview-grid">
+                    <div class="preview-card">
+                        <div class="preview-icon">⚡</div>
+                        <h3>Real-Time Odds</h3>
+                        <p>Compare live odds from 30+ sportsbooks instantly. Never miss the best line again.</p>
+                    </div>
+                    <div class="preview-card">
+                        <div class="preview-icon">🎯</div>
+                        <h3>AI Value Finder</h3>
+                        <p>Our AI identifies mispriced lines and value opportunities across all markets.</p>
+                    </div>
+                    <div class="preview-card">
+                        <div class="preview-icon">🔔</div>
+                        <h3>Smart Alerts</h3>
+                        <p>Get notified instantly when odds move or arbitrage opportunities appear.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="waitlist-footer">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+            </a>
+            <p>© 2026 SportsEdgeBet. All rights reserved. 21+ only. Please gamble responsibly.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Elements
+        const form = document.getElementById('emailForm');
+        const formContainer = document.getElementById('waitlistForm');
+        const successMessage = document.getElementById('successMessage');
+        const waitlistCount = document.getElementById('waitlistCount');
+
+        // Check if user just submitted (returning from FormSubmit)
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('success') === 'true') {
+            // Show success message
+            formContainer.classList.add('hidden');
+            successMessage.classList.add('show');
+            
+            // Clean URL without refreshing
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+
+        // Animate counter on page load
+        function animateCounter() {
+            const target = 2847;
+            const duration = 2000;
+            const start = 0;
+            const startTime = performance.now();
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(start + (target - start) * easeOut);
+                
+                waitlistCount.innerHTML = current.toLocaleString() + '<span class="plus">+</span>';
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            requestAnimationFrame(update);
+        }
+
+        // Start animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(animateCounter, 500);
+        });
+    </script>
+</body>
+</html>
+

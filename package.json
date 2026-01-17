@@ -1,0 +1,22 @@
+{
+  "name": "sportsedgebet",
+  "version": "1.0.0",
+  "description": "SportsEdgeBet - AI-powered sports betting odds comparison",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Static site - no build needed'",
+    "start": "npx serve ."
+  },
+  "dependencies": {
+    "stripe": "^14.0.0",
+    "@supabase/supabase-js": "^2.38.0"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+
+
