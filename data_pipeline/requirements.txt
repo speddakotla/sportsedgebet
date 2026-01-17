@@ -1,0 +1,15 @@
+# Data Pipeline Dependencies
+supabase>=2.0.0
+httpx>=0.25.0
+python-dotenv>=1.0.0
+pandas>=2.0.0
+numpy>=1.24.0
+
+# ML Dependencies
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# Utilities
+schedule>=1.2.0
+tenacity>=8.2.0
