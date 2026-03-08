@@ -1,0 +1,43 @@
+/* ========================================
+   MLB Theme Overrides (reuses cs2.css components)
+   ======================================== */
+
+/* MLB Theme Colors (override the variables used by cs2.css) */
+.mlb-theme {
+    /* Re-map the CS2 theme vars to MLB-ish colors so we can reuse cs2.css safely */
+    --cs2-orange: #d94848; /* red */
+    --cs2-orange-dim: rgba(217, 72, 72, 0.18);
+    --cs2-blue: #3b82f6; /* blue */
+    --cs2-blue-dim: rgba(59, 130, 246, 0.18);
+    --cs2-purple: #22c55e; /* green */
+    --cs2-purple-dim: rgba(34, 197, 94, 0.16);
+    --cs2-red: #ef4444;
+    --cs2-gold: #fbbf24;
+
+    /* Keep app accent aligned to MLB theme */
+    --accent-primary: var(--cs2-blue);
+    --accent-primary-dim: var(--cs2-blue-dim);
+    --accent-glow: rgba(59, 130, 246, 0.38);
+}
+
+/* Small label tweaks */
+.mlb-icon {
+    font-size: 1.1rem;
+}
+
+/* Make the badge look more “MLB” */
+.mlb-theme .cs2-badge {
+    background: linear-gradient(135deg, var(--cs2-blue), #60a5fa);
+    color: #061225;
+}
+
+/* Value alert to match MLB palette */
+.mlb-theme .value-alert {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(59, 130, 246, 0.05));
+    border-color: rgba(59, 130, 246, 0.35);
+}
+
+.mlb-theme .alert-content strong {
+    color: var(--cs2-blue);
+}
+

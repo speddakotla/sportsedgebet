@@ -1,12 +1,12 @@
-name: CS2 Data Pipeline
+name: MLB Data Pipeline
 
 on:
-  # Run every 30 minutes during peak hours (10am-2am UTC, covers major tournaments)
+  # Run every 30 minutes during MLB season (games typically 6pm-1am ET = 10pm-5am UTC)
   schedule:
-    - cron: '*/30 10-23 * * *'  # Every 30 min, 10am-11pm UTC
-    - cron: '*/30 0-2 * * *'    # Every 30 min, midnight-2am UTC
-    - cron: '0 6 * * *'         # Daily full sync at 6am UTC
-    - cron: '0 5 * * 0'         # Weekly ML retraining on Sundays at 5am UTC
+    - cron: '*/30 22-23 * * *'  # Every 30 min, 10pm-11pm UTC (6pm-7pm ET)
+    - cron: '*/30 0-5 * * *'     # Every 30 min, midnight-5am UTC (8pm-1am ET)
+    - cron: '0 6 * * *'          # Daily full sync at 6am UTC
+    - cron: '0 5 * * 0'          # Weekly ML retraining on Sundays at 5am UTC
   
   # Manual trigger
   workflow_dispatch:
@@ -23,8 +23,7 @@ on:
         type: choice
         options:
           - all
-          - pandascore
-          - abios
+          - mlb_stats
           - odds
 
 jobs:
@@ -51,10 +50,8 @@ jobs:
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          PANDASCORE_API_KEY: ${{ secrets.PANDASCORE_API_KEY }}
-          ABIOS_CLIENT_ID: ${{ secrets.ABIOS_CLIENT_ID }}
-          ABIOS_CLIENT_SECRET: ${{ secrets.ABIOS_CLIENT_SECRET }}
-          ODDSPAPI_API_KEY: ${{ secrets.ODDSPAPI_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          MLB_SEASON: ${{ secrets.MLB_SEASON || '2024' }}
         run: |
           cd data_pipeline
           # Determine if full sync (scheduled at 6am or manual)

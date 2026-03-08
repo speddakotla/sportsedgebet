@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLB Predictions - SportsEdge Bet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- Reuse the existing dashboard component styles -->
+    <link rel="stylesheet" href="styles/cs2.css">
+    <!-- MLB theme overrides (colors + a few labels) -->
+    <link rel="stylesheet" href="styles/mlb.css">
+</head>
+<body class="cs2-theme mlb-theme">
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">SportsEdge<span class="logo-accent">Bet</span></span>
+            </a>
+            
+            <nav class="sidebar-nav">
+                <a href="dashboard.html">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7"/>
+                        <rect x="14" y="3" width="7" height="7"/>
+                        <rect x="14" y="14" width="7" height="7"/>
+                        <rect x="3" y="14" width="7" height="7"/>
+                    </svg>
+                    All Sports
+                </a>
+                <a href="mlb-dashboard.html" class="active">
+                    <span class="nav-icon mlb-icon">⚾</span>
+                    MLB Predictions
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                    Value Bets
+                </a>
+                <a href="#">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                    Analytics
+                </a>
+            </nav>
+            
+            <div class="sidebar-section">
+                <h4>Model Stats</h4>
+                <div class="model-stats">
+                    <div class="model-stat">
+                        <span class="stat-label">Win Rate</span>
+                        <span class="stat-value positive">—</span>
+                    </div>
+                    <div class="model-stat">
+                        <span class="stat-label">ROI</span>
+                        <span class="stat-value positive">—</span>
+                    </div>
+                    <div class="model-stat">
+                        <span class="stat-label">Last 30 Days</span>
+                        <span class="stat-value">— picks</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Data Sources</h4>
+                <nav class="sidebar-nav data-sources">
+                    <a href="#" class="source-status">
+                        <span class="status-dot online"></span>
+                        MLB Stats API
+                        <span class="sync-time">live</span>
+                    </a>
+                    <a href="#" class="source-status">
+                        <span class="status-dot online"></span>
+                        The Odds API
+                        <span class="sync-time">live</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="dashboard-header cs2-header">
+                <div class="header-title">
+                    <h1>
+                        <span class="cs2-badge">MLB</span>
+                        AI Predictions
+                    </h1>
+                    <p class="header-subtitle">Real-time game edges & player props powered by machine learning</p>
+                </div>
+                <div class="header-actions">
+                    <div class="model-version">
+                        <span class="version-label">Model</span>
+                        <span class="version-value">v0.1.0</span>
+                    </div>
+                    <div class="user-menu">
+                        <div class="user-avatar">JD</div>
+                        <span>John Doe</span>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Value Bets Alert -->
+            <div class="value-alert" id="value-alert">
+                <div class="alert-icon">🔥</div>
+                <div class="alert-content">
+                    <strong>High-Value Bets Detected!</strong>
+                    <span>Our model found edges on upcoming games</span>
+                </div>
+                <button class="btn btn-primary btn-small" onclick="scrollToValueBets()">View Now</button>
+            </div>
+            
+            <!-- Stats Row -->
+            <div class="stats-row cs2-stats">
+                <div class="stat-card glow-card">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-content">
+                        <div class="value" id="stat-value-bets">—</div>
+                        <div class="label">Value Bets</div>
+                    </div>
+                    <div class="change positive" id="stat-value-bets-change">—</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <div class="value" id="stat-live-games">—</div>
+                        <div class="label">Live Games</div>
+                    </div>
+                    <div class="change" id="stat-live-games-change">Monitoring</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🤖</div>
+                    <div class="stat-content">
+                        <div class="value" id="stat-predictions">—</div>
+                        <div class="label">Predictions</div>
+                    </div>
+                    <div class="change" id="stat-predictions-change">This week</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <div class="value" id="stat-avg-edge">—</div>
+                        <div class="label">Avg Edge</div>
+                    </div>
+                    <div class="change positive" id="stat-avg-edge-change">↑ vs market</div>
+                </div>
+            </div>
+            
+            <!-- Live Games Section -->
+            <section class="matches-section">
+                <div class="section-header-row">
+                    <h2>
+                        <span class="live-dot"></span>
+                        Live Games
+                    </h2>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active">All</button>
+                        <button class="filter-tab">Value Only</button>
+                    </div>
+                </div>
+                
+                <div class="matches-grid" id="live-matches">
+                    <!-- Demo content stays until Supabase is populated -->
+                </div>
+            </section>
+            
+            <!-- Upcoming Games -->
+            <section class="matches-section">
+                <div class="section-header-row">
+                    <div>
+                        <h2>Upcoming Games</h2>
+                        <p class="section-subtitle">Next 7 days</p>
+                    </div>
+                    <a href="#" class="view-all">View schedule →</a>
+                </div>
+                
+                <div class="matches-grid" id="upcoming-matches">
+                    <!-- Demo content stays until Supabase is populated -->
+                </div>
+            </section>
+            
+            <!-- Value Bets -->
+            <section class="value-bets-section" id="value-bets-section">
+                <div class="section-header-row">
+                    <div>
+                        <h2>Top Value Bets</h2>
+                        <p class="section-subtitle">Highest model confidence edges</p>
+                    </div>
+                </div>
+                
+                <div class="value-bets-grid" id="value-bets">
+                    <!-- Filled by JS -->
+                </div>
+            </section>
+            
+            <!-- Hot Players -->
+            <section class="hot-players-section">
+                <div class="section-header-row">
+                    <div>
+                        <h2>Hot Players</h2>
+                        <p class="section-subtitle">Recent form leaders (last 5 games)</p>
+                    </div>
+                </div>
+                
+                <div class="players-grid" id="hot-players">
+                    <!-- Filled by JS -->
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/config.js"></script>
+    <script src="scripts/mlb-dashboard.js"></script>
+</body>
+</html>
+
