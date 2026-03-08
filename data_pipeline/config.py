@@ -1,5 +1,5 @@
 """
-Configuration for CS2 Data Pipeline
+Configuration for MLB Data Pipeline
 """
 import os
 from dotenv import load_dotenv
@@ -11,21 +11,17 @@ SUPABASE_URL = os.getenv("SUPABASE_URL")
 SUPABASE_SERVICE_KEY = os.getenv("SUPABASE_SERVICE_KEY")
 
 # API Keys
-PANDASCORE_API_KEY = os.getenv("PANDASCORE_API_KEY")
-ABIOS_CLIENT_ID = os.getenv("ABIOS_CLIENT_ID")
-ABIOS_CLIENT_SECRET = os.getenv("ABIOS_CLIENT_SECRET")
-ODDSPAPI_API_KEY = os.getenv("ODDSPAPI_API_KEY")
+MLB_STATS_API_KEY = os.getenv("MLB_STATS_API_KEY", "")  # Optional, MLB Stats API is free
+ODDS_API_KEY = os.getenv("ODDS_API_KEY")  # The Odds API key
+ESPN_API_KEY = os.getenv("ESPN_API_KEY", "")  # Optional backup
 
 # API Endpoints
-PANDASCORE_BASE_URL = "https://api.pandascore.co"
-ABIOS_BASE_URL = "https://api.abiosgaming.com/v3"
-ODDSPAPI_BASE_URL = "https://api.oddspapi.io/v1"
+MLB_STATS_BASE_URL = "https://statsapi.mlb.com/api/v1"
+ODDS_API_BASE_URL = "https://api.the-odds-api.com/v4"
 
 # Rate limiting
-API_RATE_LIMIT_DELAY = float(os.getenv("API_RATE_LIMIT_DELAY", "1.0"))
+API_RATE_LIMIT_DELAY = float(os.getenv("API_RATE_LIMIT_DELAY", "0.5"))  # MLB Stats API is more lenient
 
-# CS2 Game ID mappings (varies by API)
-CS2_GAME_IDS = {
-    "pandascore": "csgo",  # PandaScore uses 'csgo' for CS2
-    "abios": 5,            # Abios game ID for CS2
-}
+# MLB Configuration
+MLB_SEASON = int(os.getenv("MLB_SEASON", "2024"))  # Current season year
+MLB_SPORT_KEY = "baseball_mlb"  # For The Odds API

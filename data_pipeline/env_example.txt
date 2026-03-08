@@ -3,11 +3,10 @@
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-service-role-key
 
-# API Keys
-PANDASCORE_API_KEY=your-pandascore-api-key
-ABIOS_CLIENT_ID=your-abios-client-id
-ABIOS_CLIENT_SECRET=your-abios-client-secret
-ODDSPAPI_API_KEY=your-oddspapi-api-key
+# MLB Data Pipeline API Keys
+# Note: MLB Stats API is FREE and doesn't require an API key!
+ODDS_API_KEY=your-odds-api-key  # Get from https://the-odds-api.com/ (free tier: 500 requests/month)
 
-# Optional: Rate limiting
-API_RATE_LIMIT_DELAY=1.0
+# Optional Configuration
+MLB_SEASON=2024  # Current MLB season year
+API_RATE_LIMIT_DELAY=0.5  # Seconds between API requests (MLB Stats API is lenient)

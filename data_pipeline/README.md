@@ -1,15 +1,14 @@
-# CS2 Data Pipeline
+# MLB Data Pipeline
 
-Automated data collection and ML prediction system for CS2 esports betting.
+Automated data collection and ML prediction system for MLB baseball betting.
 
 ## Architecture
 
 ```
 data_pipeline/
 ├── fetchers/           # API fetchers for each data source
-│   ├── pandascore.py   # PandaScore API (player stats, matches)
-│   ├── abios.py        # Abios Gaming API (player props, K/D)
-│   └── oddspapi.py     # OddsPapi.io (sharp odds lines)
+│   ├── mlb_stats.py    # MLB Stats API (official, free - teams, players, games)
+│   └── odds_api.py     # The Odds API (betting odds, spreads, totals)
 ├── ml/                 # Machine learning pipeline
 │   ├── features.py     # Feature engineering
 │   ├── train.py        # Model training
@@ -40,9 +39,10 @@ cp env_example.txt .env
 Required secrets:
 - `SUPABASE_URL` - Your Supabase project URL
 - `SUPABASE_SERVICE_KEY` - Service role key (NOT anon key)
-- `PANDASCORE_API_KEY` - Get from https://pandascore.co/
-- `ABIOS_CLIENT_ID` & `ABIOS_CLIENT_SECRET` - Get from https://abiosgaming.com/
-- `ODDSPAPI_API_KEY` - Get from https://oddspapi.io/
+- `ODDS_API_KEY` - Get from https://the-odds-api.com/ (free tier available)
+- `MLB_SEASON` - Current MLB season year (default: 2024)
+
+Note: MLB Stats API is free and doesn't require an API key!
 
 ### 3. Set Up Database
 
@@ -52,8 +52,8 @@ Run the schema in Supabase SQL Editor:
 -- First run the main schema
 \i supabase-schema.sql
 
--- Then run the CS2 schema
-\i supabase-cs2-schema.sql
+-- Then run the MLB schema
+\i supabase-mlb-schema.sql
 ```
 
 ### 4. Configure GitHub Secrets
@@ -61,36 +61,33 @@ Run the schema in Supabase SQL Editor:
 Add these secrets to your GitHub repository for automated pipelines:
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_KEY`
-- `PANDASCORE_API_KEY`
-- `ABIOS_CLIENT_ID`
-- `ABIOS_CLIENT_SECRET`
-- `ODDSPAPI_API_KEY`
+- `ODDS_API_KEY`
+- `MLB_SEASON` (optional, defaults to 2024)
 
 ## Usage
 
 ### Manual Data Sync
 
 ```bash
-# Regular sync (upcoming matches, live data)
+# Regular sync (upcoming games, live data)
 python main.py
 
 # Full historical sync
 python main.py --full-sync
 
 # Specific source only
-python main.py --source pandascore
-python main.py --source abios
+python main.py --source mlb_stats
 python main.py --source odds
 ```
 
 ### Automated Pipeline (GitHub Actions)
 
 The pipeline runs automatically:
-- **Every 30 minutes** during peak hours (10am-2am UTC)
+- **Every 30 minutes** during MLB game hours (10pm-5am UTC, covers 6pm-1am ET)
 - **Daily full sync** at 6am UTC
 - **Weekly model retraining** on Sundays at 5am UTC
 
-Manual trigger: Go to Actions → CS2 Data Pipeline → Run workflow
+Manual trigger: Go to Actions → MLB Data Pipeline → Run workflow
 
 ### ML Predictions
 
@@ -107,9 +104,8 @@ python predict.py
 
 | API | Free Tier | Paid Tier |
 |-----|-----------|-----------|
-| PandaScore | Limited | ~$50/mo |
-| Abios | On request | Custom |
-| OddsPapi.io | Limited | ~$30/mo |
+| MLB Stats API | Free, unlimited | N/A |
+| The Odds API | 500 requests/month | ~$10-50/mo |
 
 The pipeline respects rate limits automatically. Adjust `API_RATE_LIMIT_DELAY` in config if needed.
 
@@ -120,20 +116,25 @@ The pipeline respects rate limits automatically. Adjust `API_RATE_LIMIT_DELAY` i
 3. **Store** → Upsert to Supabase PostgreSQL
 4. **Aggregate** → Calculate player rolling stats
 5. **Features** → Generate ML features
-6. **Predict** → Run models on upcoming matches
+6. **Predict** → Run models on upcoming games
 7. **Alert** → Surface value bets to users
 
 ## Model Types
 
-### Player Kills Over/Under
-- **Input**: Player form, line value, opponent strength
+### Player Hits Over/Under
+- **Input**: Player form, line value, opposing pitcher strength
 - **Output**: Probability of going over the line
 - **Model**: XGBoost classifier
 
-### Match Winner
-- **Input**: Team stats, head-to-head, map pool
+### Game Winner (Moneyline)
+- **Input**: Team stats, head-to-head, starting pitchers, home/away
 - **Output**: Win probability for each team
 - **Model**: LightGBM classifier
+
+### Total Runs Over/Under
+- **Input**: Team offensive stats, pitcher stats, ballpark factors
+- **Output**: Probability of going over/under total
+- **Model**: XGBoost regressor
 
 ## Monitoring
 

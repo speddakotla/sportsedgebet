@@ -1,5 +1,4 @@
-from .pandascore import PandaScoreFetcher
-from .abios import AbiosFetcher
-from .oddspapi import OddsPapiFetcher
+from .mlb_stats import MLBStatsFetcher
+from .odds_api import OddsAPIFetcher
 
-__all__ = ['PandaScoreFetcher', 'AbiosFetcher', 'OddsPapiFetcher']
+__all__ = ['MLBStatsFetcher', 'OddsAPIFetcher']
