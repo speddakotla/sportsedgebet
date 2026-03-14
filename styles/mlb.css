@@ -2,19 +2,35 @@
    MLB Theme Overrides (reuses cs2.css components)
    ======================================== */
 
-/* MLB Theme Colors (override the variables used by cs2.css) */
+/* MLB Theme – navy & red baseball palette (replaces black UI) */
 .mlb-theme {
-    /* Re-map the CS2 theme vars to MLB-ish colors so we can reuse cs2.css safely */
-    --cs2-orange: #d94848; /* red */
-    --cs2-orange-dim: rgba(217, 72, 72, 0.18);
-    --cs2-blue: #3b82f6; /* blue */
+    /* Backgrounds – deep MLB navy instead of black */
+    --bg-primary: #0C2340;
+    --bg-secondary: #132f4c;
+    --bg-tertiary: #1a3a5c;
+    --bg-card: #152d44;
+    --bg-card-hover: #1e4976;
+
+    /* Text – crisp on navy */
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+
+    /* Borders – subtle blue-tinted */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color-hover: rgba(255, 255, 255, 0.18);
+
+    /* Re-map the CS2 theme vars to MLB colors for shared components */
+    --cs2-orange: #C41E3A; /* baseball red */
+    --cs2-orange-dim: rgba(196, 30, 58, 0.2);
+    --cs2-blue: #3b82f6;
     --cs2-blue-dim: rgba(59, 130, 246, 0.18);
-    --cs2-purple: #22c55e; /* green */
+    --cs2-purple: #22c55e;
     --cs2-purple-dim: rgba(34, 197, 94, 0.16);
     --cs2-red: #ef4444;
     --cs2-gold: #fbbf24;
 
-    /* Keep app accent aligned to MLB theme */
+    /* App accent – MLB blue */
     --accent-primary: var(--cs2-blue);
     --accent-primary-dim: var(--cs2-blue-dim);
     --accent-glow: rgba(59, 130, 246, 0.38);
