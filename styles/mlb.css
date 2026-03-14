@@ -36,6 +36,15 @@
     --accent-glow: rgba(59, 130, 246, 0.38);
 }
 
+/* MLB page background – navy base with subtle stadium-style gradient */
+.mlb-theme,
+.mlb-theme .dashboard-layout {
+    background: linear-gradient(180deg, #0C2340 0%, #0a1628 50%, #0C2340 100%);
+}
+.mlb-theme .main-content {
+    background: transparent;
+}
+
 /* Small label tweaks */
 .mlb-icon {
     font-size: 1.1rem;
